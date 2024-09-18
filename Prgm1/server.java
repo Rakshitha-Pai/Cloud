@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 import javax.crypto.SecretKey;
 
-public class serverr {
+public class server {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(8080);
@@ -16,15 +16,19 @@ public class serverr {
                 String encryptedMessage = in.readLine();
                 System.out.println("Received encrypted message: " + encryptedMessage);
 
-                SecretKey key = Aes.getAESKey(); 
-                String decryptedMessage = Aes.decrypt(encryptedMessage, key);  
-                System.out.println("Decrypted message: " + decryptedMessage);
+                SecretKey key = AESEncUtil.getAESKey();
+                try {
+                    String decryptedMessage = AESEncUtil.decrypt(encryptedMessage, key);
+                    System.out.println("Decrypted Message: " + decryptedMessage);
+                    
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    out.println("Message received and decrypted");
 
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                out.println("Message processed");
+                    out.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                in.close();
-                out.close();
                 socket.close();
             }
         } catch (Exception e) {
@@ -32,4 +36,3 @@ public class serverr {
         }
     }
 }
-
