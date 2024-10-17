@@ -50,5 +50,12 @@ if __name__ == "__main__":
     print(f"Decrypted message: {decrypted_msg}")
 
 
-
+# Output:
+# Enter a prime number (p): 91
+# Enter another prime number (q): 73
+# Public Key: (17, 6643)
+# Private Key: (4193, 6643)
+# Enter the message to encrypt: rakshithaa
+# Encrypted message: [641, 587, 1712, 6585, 3562, 5929, 6330, 3562, 587, 587]
+# Decrypted message: rakshithaa 
 	
